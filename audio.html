@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* Fade-in animation */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -17,16 +16,49 @@ header { background:#222; color:white; padding:20px; }
 nav { background:#444; padding:10px; }
 nav a { color:white; text-decoration:none; margin:0 15px; }
 nav a:hover { text-decoration: underline; color:black; }
+
 .container { 
     padding:40px; 
-    animation: fadeIn 2s ease-in-out; /* fade-in effect */
+    animation: fadeIn 2s ease-in-out;
 }
+
 .audio-item { 
-    margin:15px 0; padding:15px; background:#007bff; color:white; 
-    border-radius:6px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; 
+    margin:20px 0; 
+    padding:20px; 
+    background:#007bff; 
+    color:white; 
+    border-radius:8px; 
 }
-.audio-item audio { width:60%; max-width:300px; margin-top:5px; }
-#searchBar { padding:10px; width:80%; max-width:400px; margin-bottom:20px; border-radius:5px; border:1px solid #ccc; }
+
+audio {
+    width:100%;
+    max-width:400px;
+    margin-top:10px;
+}
+
+.download-btn {
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 15px;
+    background:white;
+    color:#007bff;
+    border-radius:5px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.download-btn:hover {
+    background:#ddd;
+}
+
+#searchBar {
+    padding:10px;
+    width:80%;
+    max-width:400px;
+    margin-bottom:20px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
 </style>
 </head>
 
@@ -50,23 +82,25 @@ nav a:hover { text-decoration: underline; color:black; }
 
 <div id="audioList">
 
-  <!-- Your first Drive audio -->
-  <div class="audio-item" data-title="සුරුවම අයිනේ - Suruwama Ayine">
-    <span>Suruwama Ayine</span>
-    <audio controls preload="none" >
-      <source src="https://dl.dropboxusercontent.com/s/a2whm2n3kfd4zupmi6fv2/AUD-20220107-WA0003.mp3" type="audio/mpeg">
-    </audio>
-  </div>
+  <!-- Audio Item -->
+  <div class="audio-item" data-title="Deweni Amma - දෙවෙනි අම්මා">
+    <h3>Deweni Amma - දෙවෙනි අම්මා</h3>
 
-  <!-- Example: additional audios -->
-  <!--
-  <div class="audio-item" data-title="Song Name">
-    <span>Song Name</span>
+    <!-- Dropbox Audio Player -->
     <audio controls>
-      <source src="DIRECT_DRIVE_LINK" type="audio/mpeg">
+      <source src="https://www.dropbox.com/scl/fi/a2whm2n3kfd4zupmi6fv2/Deweni-Amma-Breath.Musix.mp3?rlkey=90wrio56no33rmhkdeyi3qsvt&st=38hidn3n&raw=1" type="audio/mpeg">
+      Your browser does not support audio.
     </audio>
+
+    <!-- Download Button -->
+    <br>
+    <a class="download-btn"
+       href="https://www.dropbox.com/scl/fi/a2whm2n3kfd4zupmi6fv2/Deweni-Amma-Breath.Musix.mp3?rlkey=90wrio56no33rmhkdeyi3qsvt&st=38hidn3n&raw=1"
+       download="Deweni Amma - දෙවෙනි අම්මා (Breath.Musix)-dewrajapaksha.mp3">
+       Download
+    </a>
+
   </div>
-  -->
 
 </div>
 </div>
@@ -76,7 +110,6 @@ nav a:hover { text-decoration: underline; color:black; }
 </footer>
 
 <script>
-// Simple search filter
 const searchBar = document.getElementById('searchBar');
 const audioItems = document.querySelectorAll('.audio-item');
 
@@ -84,7 +117,7 @@ searchBar.addEventListener('input', function() {
   const query = this.value.toLowerCase();
   audioItems.forEach(item => {
     const title = item.getAttribute('data-title').toLowerCase();
-    item.style.display = title.includes(query) ? 'flex' : 'none';
+    item.style.display = title.includes(query) ? 'block' : 'none';
   });
 });
 </script>
