@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Audio Library - Dew Rajapaksha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { margin:0; font-family: Arial; background:#f4f4f4; text-align:center; }
+header { background:#222; color:white; padding:20px; }
+nav { background:#444; padding:10px; }
+nav a { color:white; text-decoration:none; margin:0 15px; }
+nav a:hover { text-decoration: underline; color:black; }
+.container { padding:40px; }
+.audio-item { margin:15px 0; padding:15px; background:#007bff; color:white; border-radius:6px; display:flex; justify-content:space-between; align-items:center; }
+.audio-item audio { width:60%; }
+#searchBar { padding:10px; width:80%; max-width:400px; margin-bottom:20px; border-radius:5px; border:1px solid #ccc; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Audio Library</h1>
+<p>Tap to play or search your audio</p>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="media.html">Media</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<div class="container">
+<h2>Search Audio</h2>
+<input type="text" id="searchBar" placeholder="Search audio...">
+
+<div id="audioList">
+  <div class="audio-item" data-title="සුරුවම අයිනේ පුන්චි පැලේ  - Suruwama aine punchi pele - ( cover song )">
+    <span> Suruwama Ayine</span>
+    <audio controls>
+      <source src="සුරුවම අයිනේ පුන්චි පැලේ  - Suruwama aine punchi pele - ( cover song ).mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  <div class="audio-item" data-title="Coding Beats">
+    <span>Coding Beats</span>
+    <audio controls>
+      <source src="audio/codingbeats.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
+</div>
+
+<footer>
+<p>© 2026 Dew Rajapaksha | All Rights Reserved</p>
+</footer>
+
+<script>
+// Simple search filter
+const searchBar = document.getElementById('searchBar');
+const audioItems = document.querySelectorAll('.audio-item');
+
+searchBar.addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  audioItems.forEach(item => {
+    const title = item.getAttribute('data-title').toLowerCase();
+    if(title.includes(query)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
