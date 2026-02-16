@@ -18,14 +18,23 @@ body {
   text-align:center;
 }
 
-header { background:#222; color:white; padding:20px; }
+header { 
+  background:#222; 
+  color:white; 
+  padding:20px; 
+}
 
-nav { background:#444; padding:10px; }
+nav { 
+  background:#444; 
+  padding:10px; 
+}
+
 nav a {
   color:white;
   text-decoration:none;
   margin:0 15px;
 }
+
 nav a:hover {
   text-decoration: underline;
   color:black;
@@ -113,22 +122,17 @@ footer {
 </footer>
 
 <script>
-// ===== Your audio list here =====
+
+// ================= AUDIO LIST =================
 const audios = [
   {
     title: "Thani Sithuwillaka - තනි සිතුවිල්ලක",
-    src: "audio/3142.mp3",
+    src: "audio/3142.mp3",   // make sure this file exists in audio folder
     downloadName: "Thani-Sithuwillaka-dewrajapaksha.mp3"
-  },
-  {
-    title: "Newe Song",
-    src: "audio/.mp3",
-    downloadName: "New Song.mp3"
-      
   }
 ];
 
-// sort alphabetically
+// Sort alphabetically
 audios.sort((a,b) => a.title.localeCompare(b.title));
 
 const audioList = document.getElementById('audioList');
@@ -140,8 +144,8 @@ function renderAudios(filter = "") {
   audios.forEach(audio => {
     if(audio.title.toLowerCase().includes(query)) {
       const div = document.createElement('div');
-      div.className = "audio-item";
-      div.setAttribute("data-title", audio.title);
+      div.className = 'audio-item';
+
       div.innerHTML = `
         <h3>${audio.title}</h3>
         <audio controls>
@@ -149,24 +153,24 @@ function renderAudios(filter = "") {
           Your browser does not support audio.
         </audio>
         <br>
-        <a class="download-btn"
-           href="${audio.src}"
-           download="${audio.downloadName}">
-           Download
+        <a class="download-btn" href="${audio.src}" download="${audio.downloadName}">
+          Download
         </a>
       `;
+
       audioList.appendChild(div);
     }
   });
 }
 
-// first render
+// Initial load
 renderAudios();
 
-// search filter
-document.getElementById("searchBar").addEventListener("input", function() {
+// Search function
+document.getElementById('searchBar').addEventListener('input', function() {
   renderAudios(this.value);
 });
+
 </script>
 
 </body>
