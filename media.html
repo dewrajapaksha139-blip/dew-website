@@ -6,6 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Apply to container */
+.container {
+    padding:40px;
+    animation: fadeIn 2s ease-in-out;
+}
 body { margin:0; font-family: Arial; background:#f4f4f4; text-align:center; }
 header { background:#222; color:white; padding:20px; }
 nav { background:#444; padding:10px; }
@@ -34,9 +45,9 @@ footer { background:#222; color:white; padding:15px; margin-top:20px; }
 
 <div class="container">
 <h2>Choose Media Type</h2>
-<a href="images.html" class="media-button">Images</a>
-<a href="videos.html" class="media-button">Videos</a>
-<a href="audios.html" class="media-button">Audios</a>
+<a href="/audio" class="media-button">Audio</a>
+<a href="/video" class="media-button">Video</a>
+<a href="/image" class="media-button">Image</a>
 </div>
 
 <footer>
