@@ -81,27 +81,7 @@ audio {
 <input type="text" id="searchBar" placeholder="Search audio...">
 
 <div id="audioList">
-
-  <!-- Audio Item -->
-  <div class="audio-item" data-title="Deweni Amma - දෙවෙනි අම්මා">
-    <h3>Deweni Amma - දෙවෙනි අම්මා</h3>
-
-    <!-- Dropbox Audio Player -->
-    <audio controls>
-      <source src="https://www.dropbox.com/scl/fi/a2whm2n3kfd4zupmi6fv2/Deweni-Amma-Breath.Musix.mp3?rlkey=90wrio56no33rmhkdeyi3qsvt&st=38hidn3n&raw=1" type="audio/mpeg">
-      Your browser does not support audio.
-    </audio>
-
-    <!-- Download Button -->
-    <br>
-    <a class="download-btn"
-       href="https://www.dropbox.com/scl/fi/a2whm2n3kfd4zupmi6fv2/Deweni-Amma-Breath.Musix.mp3?rlkey=90wrio56no33rmhkdeyi3qsvt&st=38hidn3n&raw=1"
-       download="Deweni Amma - දෙවෙනි අම්මා (Breath.Musix)-dewrajapaksha.mp3">
-       Download
-    </a>
-
-  </div>
-
+  <!-- Audio items inserted dynamically -->
 </div>
 </div>
 
@@ -110,7 +90,69 @@ audio {
 </footer>
 
 <script>
+// Array of audios – make sure Dropbox links end with ?raw=1
+const audios = [
+  {
+    title: "Deweni Amma - දෙවෙනි අම්මා",
+    src: "https://www.dropbox.com/scl/fi/a2whm2n3kfd4zupmi6fv2/Deweni-Amma-Breath.Musix.mp3?raw=1",
+    downloadName: "Deweni-Amma-dewrajapaksha.mp3"
+  },
+  {
+    title: "Suruwama Ayine",
+    src: "https://www.dropbox.com/scl/fi/a2whm2n3kfd4zupmi6fv2/Suruwama-Ayine.mp3?raw=1",
+    downloadName: "Suruwama-Ayine-dewrajapaksha.mp3"
+  },
+  {
+    title: "Another Song",
+    src: "https://www.dropbox.com/scl/fi/YOURFILEID/Another-Song.mp3?raw=1",
+    downloadName: "Another-Song-dewrajapaksha.mp3"
+  }
+  // Add more audios here – just copy a block and update title/src/downloadName
+];
+
+// Sort audios alphabetically by title
+audios.sort((a,b) => a.title.localeCompare(b.title));
+
+const audioList = document.getElementById('audioList');
+
+// Function to render audio items
+function renderAudios(filter = "") {
+  audioList.innerHTML = ""; // Clear existing
+  const query = filter.toLowerCase();
+
+  audios.forEach(audio => {
+    if(audio.title.toLowerCase().includes(query)) {
+      const div = document.createElement('div');
+      div.className = 'audio-item';
+      div.setAttribute('data-title', audio.title);
+      div.innerHTML = `
+        <h3>${audio.title}</h3>
+        <audio controls>
+          <source src="${audio.src}" type="audio/mpeg">
+          Your browser does not support audio.
+        </audio>
+        <br>
+        <a class="download-btn" href="${audio.src}" download="${audio.downloadName}">
+          Download
+        </a>
+      `;
+      audioList.appendChild(div);
+    }
+  });
+}
+
+// Initial render
+renderAudios();
+
+// Search functionality
 const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('input', function() {
+  renderAudios(this.value);
+});
+</script>
+
+</body>
+</html>const searchBar = document.getElementById('searchBar');
 const audioItems = document.querySelectorAll('.audio-item');
 
 searchBar.addEventListener('input', function() {
