@@ -81,7 +81,7 @@ audio {
 <input type="text" id="searchBar" placeholder="Search audio...">
 
 <div id="audioList">
-  <!-- Audio items inserted dynamically -->
+  <!-- Audio items will be inserted here dynamically -->
 </div>
 </div>
 
@@ -90,27 +90,63 @@ audio {
 </footer>
 
 <script>
-// Array of audios hosted in your GitHub repo
+// Array of audio items
 const audios = [
   {
-    title: "Deweni Amma - දෙවෙනි අම්මා",
-    src: "audio/Deweni-Amma-Breath.Musix.mp3",
-    downloadName: "Deweni-Amma-dewrajapaksha.mp3"
-  },
-  {
-    title: "Suruwama Ayine",
-    src: "audio/Suruwama-Ayine.mp3",
-    downloadName: "Suruwama-Ayine-dewrajapaksha.mp3"
-  },
-  {
     title: "Thani Sithuwillaka - තනි සිතුවිල්ලක",
-    src: "audio/3142.mp3",
-    downloadName: "Thani-Sithuwillaka-dewrajapaksha.mp3"
+    src: "audio/",
+    downloadName: "Thani Sithuwillaka - තනි සිතුවිල්ලක (Breath.Musix).mp3"
+  },
+  {
+    title: "Another Song",
+    src: "https://dl.dropboxusercontent.com/s/EXAMPLE/example.mp3",
+    downloadName: "Another-Song-dewrajapaksha.mp3"
   }
-  // Add more audios here by adding new objects
+  // Add more audios here
+];
 
-// Sort audios alphabetically by title
+// Sort audios alphabetically
 audios.sort((a, b) => a.title.localeCompare(b.title));
+
+const audioList = document.getElementById('audioList');
+
+function renderAudios(filter = "") {
+  audioList.innerHTML = ""; // Clear existing
+  const query = filter.toLowerCase();
+
+  audios.forEach(audio => {
+    if(audio.title.toLowerCase().includes(query)) {
+      const div = document.createElement('div');
+      div.className = 'audio-item';
+      div.setAttribute('data-title', audio.title);
+      div.innerHTML = `
+        <h3>${audio.title}</h3>
+        <audio controls>
+          <source src="${audio.src}" type="audio/mpeg">
+          Your browser does not support audio.
+        </audio>
+        <br>
+        <a class="download-btn" href="${audio.src}" download="${audio.downloadName}">
+          Download
+        </a>
+      `;
+      audioList.appendChild(div);
+    }
+  });
+}
+
+// Initial render
+renderAudios();
+
+// Search functionality
+const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('input', function() {
+  renderAudios(this.value);
+});
+</script>
+
+</body>
+</html>waudios.sort((a, b) => a.title.localeCompare(b.title));
 
 const audioList = document.getElementById('audioList');
 
