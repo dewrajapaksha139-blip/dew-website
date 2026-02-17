@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Audio Library - Dew Rajapaksha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Apple-style Web Fonts (Works for All Devices) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+Sinhala:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+body {
+  margin:0;
+  font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
+  background:#f4f4f4;
+  text-align:center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header { 
+  background:#222; 
+  color:white; 
+  padding:20px; 
+}
+
+nav { 
+  background:#444; 
+  padding:10px; 
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:600;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color:#ddd;
+}
+
+.container {
+  padding:40px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.audio-item {
+  margin:20px 0;
+  padding:20px;
+  background:#007bff;
+  color:white;
+  border-radius:12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+audio {
+  width:100%;
+  max-width:400px;
+  margin-top:10px;
+}
+
+.download-btn {
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 15px;
+  background:white;
+  color:#007bff;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.2s ease;
+}
+
+.download-btn:hover {
+  background:#f1f1f1;
+}
+
+#searchBar {
+  padding:10px;
+  width:80%;
+  max-width:400px;
+  margin-bottom:20px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
+}
+
+footer {
+  background:#222;
+  color:white;
+  padding:15px 0;
+  text-align:center;
+  margin-top:40px;
+  border-top:1px solid #444;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Audio Library</h1>
+  <p>Tap to play or search your audio</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="media.html">Media</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="container">
+
+<h2>Search Audio</h2>
+<input type="text" id="searchBar" placeholder="Search audio...">
+
+<div id="audioList"></div>
+
+</div>
+
+<footer>
+  <p>© 2026 Dew Rajapaksha | All Rights Reserved</p>
+</footer>
+
+<script>
+
+// ================= AUDIO LIST =================
+const audios = [
+  {
+    title: "Thani Sithuwillaka",
+    src: "audio/3142.mp3",
+    downloadName: "Thani-Sithuwillaka-dewrajapaksha.mp3"
+  }
+];
+
+// Sort alphabetically
+audios.sort((a,b) => a.title.localeCompare(b.title));
+
+const audioList = document.getElementById('audioList');
+
+function renderAudios(filter = "") {
+  audioList.innerHTML = "";
+  const query = filter.toLowerCase();
+
+  audios.forEach(audio => {
+    if(audio.title.toLowerCase().includes(query)) {
+      const div = document.createElement('div');
+      div.className = 'audio-item';
+
+      div.innerHTML = `
+        <h3>${audio.title}</h3>
+        <audio controls>
+          <source src="${audio.src}" type="audio/mpeg">
+          Your browser does not support audio.
+        </audio>
+        <br>
+        <a class="download-btn" href="${audio.src}" download="${audio.downloadName}">
+          Download
+        </a>
+      `;
+
+      audioList.appendChild(div);
+    }
+  });
+}
+
+// Initial load
+renderAudios();
+
+// Search function
+document.getElementById('searchBar').addEventListener('input', function() {
+  renderAudios(this.value);
+});
+
+</script>
+
+</body>
+</html>
